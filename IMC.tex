@@ -1,0 +1,15 @@
+\documentclass[11pt,twoside,a4paper]{article}
+\begin{document}
+	\section{Chapter 12}
+	\subsection{Problem.2}
+	{\bf Solution: }We assume that the one-way function does not exists. Then for any function $f:{\{0,1\}}^{*}\rightarrow{\{0,1\}}^{*}$, there exists a PPT algorithm that can inverts $f$.\\
+	In a one-time one bit signature scheme ${\Pi}=({\sf Gen,Sign,Ver})$. ${Gen}$ generates a public-private key pair $(pk,sk)$ with a security parameter $1^{\lambda}$. ${Sign}$ takes as input a bit $b$ and the private key $sk$ and outputs the signature $\sigma$. ${Ver}$ takes as input a bit $b$, a public key $pk$ and the signature $\sigma$, and only outputs 1 when $\sigma$ is a valid signature of $b$.\\
+	If one-way function does not exists, we can construct an algorithm $\mathcal{A}$ to attack the one-time one bit signature scheme ${\Pi}$ as follows:\\
+	\begin{enumerate}
+		\item Run ${\sf Gen}(1^{\lambda})$ to generate a key pair $(sk,pk)$.
+		\item Choose a random bit $b{\in}_{R}\{0,1\}$, and ask the signature oracle $\sigma \leftarrow {\sf Sign}(sk,b)$.
+		\item According to the signature $\sigma$ as output, calls a invert algorithm to invert the $Sign$ algorithm, which returns $sk$ in polymal time.
+		\item Computes with ${\sigma}'\leftarrow Sign(sk,1-b)$ and uses $(1-b,{\sigma})$ as the input of the $Ver$ algorithm, which return 1 with probability 1. 
+	\end{enumerate}
+	Thus, we conclude that if one way function does not exists, then secure one-time signature scheme can't exists, which proves the theory.
+\end{document}
